@@ -1,5 +1,4 @@
 import type { Project } from "@/models/project";
-import Stack from "./Stack";
 
 type Props = {
   project: Project;

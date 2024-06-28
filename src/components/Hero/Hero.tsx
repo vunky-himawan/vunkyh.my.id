@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Heading from "../Heading";
 
 const Hero = () => {
-  const imageRef = useRef(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const images: string[] = [
     "/assets/gif/lv_0_20240625225819-ezgif.com-loop-count.gif",
     "/assets/images/DSC09725 (5).webp",
