@@ -1,0 +1,46 @@
+---
+import SEO from "@/components/SEO";
+import type { CollectionEntry } from "astro:content";
+import Main from "@/layouts/MainLayouts";
+import ProjectLayout from "@/layouts/ProjectLayout";
+import { getCollection } from "astro:content";
+import Header from "@/components/Header";
+import { ViewTransitions, fade } from "astro:transitions";
+import Footer from "@/components/Footer";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type Props = {
+  entry: CollectionEntry<"projects">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: "1s" })}>
+  <head>
+    <SEO
+      pageTitle={`Vunky Himawan | Project | ${entry.data.title}`}
+      description={entry.data.description}
+      pathName={`/project/${entry.slug}`}
+    />
+    <ViewTransitions />
+  </head>
+  <body class="font-satoshi">
+    <Main>
+      <Header client:load pathUrl={Astro.url.pathname} />
+      <ProjectLayout frontmatter={entry.data} slug={entry.slug} client:load>
+        <Content />
+      </ProjectLayout>
+      <Footer client:load />
+    </Main>
+  </body>
+</html>
