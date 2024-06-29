@@ -7,8 +7,12 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   // Enable React to support React JSX components.
-  integrations: [react(), UnoCSS({
-    injectReset: true
-  }), mdx()],
-  site: "https://ziraa.my.id"
+  integrations: [
+    react(),
+    UnoCSS({
+      injectReset: true,
+    }),
+    mdx(),
+  ],
+  site: "https://vunkyh.my.id",
 });
