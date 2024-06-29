@@ -61,6 +61,7 @@ const ProjectLayout = ({ children, frontmatter, slug }: Props) => {
                 src={`/assets/project-images/${slug}/${medias[imageIndex]}`}
                 alt=""
                 className="rounded-2xl w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="border rounded-xl p-3">
