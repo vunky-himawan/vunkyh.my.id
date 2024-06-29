@@ -18,6 +18,7 @@ const Card = ({ data, slug }: Props) => {
               src={`/assets/project-images/${slug}/${data.cover}`}
               alt=""
               className="rounded-2xl"
+              loading="lazy"
             />
           </div>
           <h1 className="font-bold font-cabinet text-2xl">{data.title}</h1>

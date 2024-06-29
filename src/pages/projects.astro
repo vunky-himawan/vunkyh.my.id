@@ -23,9 +23,9 @@ const sortedProjects = projects.sort(
     <ViewTransitions />
   </head>
   <body class="font-satoshi">
-    <Main client:load>
+    <Main>
       <ProjectsLayout
-        client:load
+        client:visible
         sortedProjects={sortedProjects}
         pathURL={Astro.url.pathname}
       />

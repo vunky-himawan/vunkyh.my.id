@@ -24,9 +24,9 @@ const currentPath = Astro.url.pathname;
     <ViewTransitions />
   </head>
   <body class="font-satoshi">
-    <Main client:load>
-      <Header client:load pathUrl={currentPath} />
-      <Home client:load projects={sortedProjects} />
+    <Main>
+      <Header client:visible pathUrl={currentPath} />
+      <Home client:visible projects={sortedProjects} />
     </Main>
   </body>
 </html>
