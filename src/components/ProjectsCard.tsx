@@ -16,7 +16,7 @@ const Card = ({ data, slug }: Props) => {
           <div className="relative z-2">
             <div className="lg:h-[15rem] md:h-[18rem] z-2">
               <img
-                src={`/assets/project-images/${slug}/${data.cover}`}
+                src={`/assets/project-images/${slug}/${data.images[0]}`}
                 alt=""
                 className="aspect-ratio-video rounded-2xl w-full h-full object-cover"
                 loading="lazy"

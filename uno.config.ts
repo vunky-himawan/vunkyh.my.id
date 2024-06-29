@@ -71,6 +71,12 @@ export default defineConfig({
     {
       getCSS: () => {
         return `
+        .3d {
+        box-shadow: -0px 0px 0px 9px rgba(0,0,0,1);
+-webkit-box-shadow: -0px 0px 0px 9px rgba(0,0,0,1);
+-moz-box-shadow: -1px 0px 0px 9px rgba(0,0,0,1);
+}
+
           @keyframes runningText {
             0% { transform: translateX(100%); }
             100% { transform: translateX(100%); }  

@@ -2,6 +2,7 @@ import BackButton from "@/components/BackButton";
 import Heading from "@/components/Heading";
 import type { Project } from "@/models/project";
 import { useEffect, useState } from "react";
+import CoverLayout from "./CoverLayout";
 
 interface Props {
   children: React.ReactNode;
@@ -10,22 +11,6 @@ interface Props {
 }
 
 const ProjectLayout = ({ children, frontmatter, slug }: Props) => {
-  const medias: [string, string | null] = [frontmatter.cover, frontmatter.gif];
-  const [imageIndex, setImageIndex] = useState(0);
-
-  if (frontmatter.gif) {
-    useEffect(() => {
-      const interval = setInterval(
-        () => {
-          setImageIndex((prevIndex) => (prevIndex + 1) % medias.length);
-        },
-        imageIndex === 0 ? 3000 : 3000
-      );
-
-      return () => clearInterval(interval);
-    }, [imageIndex]);
-  }
-
   let formatedDate;
 
   if (frontmatter.date) {
@@ -58,20 +43,15 @@ const ProjectLayout = ({ children, frontmatter, slug }: Props) => {
             </h5>
           </div>
           <div className="relative flex flex-col gap-y-5">
-            <div className="lg:max-h-3xl overflow-hidden rounded-2xl">
-              <img
-                src={`/assets/project-images/${slug}/${medias[imageIndex]}`}
-                alt=""
-                className="rounded-2xl w-full h-full object-cover"
-                loading="lazy"
-              />
+            <div className="lg:h-2xl overflow-hidden rounded-2xl">
+              <CoverLayout images={frontmatter.images} slug={slug} />
             </div>
             <div className="flex flex-col gap-5 md:flex-row">
               <div className="border rounded-xl p-3 md:order-first md:flex-1">
                 <h1 className="font-semibold text-xl font-cabinet">
                   Tech Stack
                 </h1>
-                <div className="pt-3"> 
+                <div className="pt-3">
                   <ul className="flex markdown gap-3 flex-wrap">
                     {frontmatter.stack.map((stack, index) => (
                       <li className="border rounded-md" key={index}>
