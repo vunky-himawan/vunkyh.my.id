@@ -42,6 +42,7 @@ const Card = ({ project, slug, colSpan }: Props) => {
           ></div>
         </div>
         {/* End Animation */}
+
         <div className="relative z-2">
           <div className="text-xl h-max py-3 capitalize flex flex-col justify-center items-center gap-5">
             <h4 className="font-bold text-4xl text-center font-cabinet">
@@ -61,7 +62,7 @@ const Card = ({ project, slug, colSpan }: Props) => {
         </div>
         <div className="lg:h-[25rem] md:h-[13rem] z-2">
           <img
-            src={`/assets/project-images/${slug}/${project.cover}`}
+            src={`/assets/project-images/${slug}/${project.images[0]}`}
             alt=""
             className="aspect-ratio-video rounded-2xl w-full h-full object-cover"
             loading="lazy"

@@ -6,6 +6,7 @@ type Props = {
   data: CollectionEntry<"projects">[];
 };
 
+
 const Project = ({ data }: Props) => {
   return (
     <>
@@ -23,7 +24,9 @@ const Project = ({ data }: Props) => {
               key={index}
               slug={project.slug}
               project={project.data}
-              colSpan={index === 0 || index === 3 ? "lg:col-span-7" : "lg:col-span-6"}
+              colSpan={
+                index === 0 || index === 3 ? "lg:col-span-7" : "lg:col-span-6"
+              }
             />
           ))}
         </div>
