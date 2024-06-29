@@ -12,7 +12,6 @@ const projectCollection = defineCollection({
     type: z.enum(["personal", "campus assignment"]),
     stack: z.array(z.tuple([z.string(), z.string(), z.string()])),
     featured: z.boolean().default(false),
-    role: z.string(),
   }),
 });
 

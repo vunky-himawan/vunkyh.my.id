@@ -9,5 +9,4 @@ export type Project = {
   type: "personal" | "campus assignment";
   stack: [string, string, string][];
   featured: boolean;
-  role: string;
 };
