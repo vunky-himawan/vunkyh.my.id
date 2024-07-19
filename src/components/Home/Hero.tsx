@@ -51,7 +51,7 @@ const Hero = () => {
                 >
                   <div className="i-mdi:linkedin"></div>
                 </a>
-                <a href="/assets/Vunky Himawan - CV.pdf" target="_blank">
+                <a href="/Vunky Himawan - CV.pdf" target="_blank">
                   <div className="i-ic:round-description"></div>
                 </a>
               </div>
