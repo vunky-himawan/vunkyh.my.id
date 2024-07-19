@@ -39,16 +39,19 @@ const Hero = () => {
                 how I bring ideas to life with creative design.
               </p>
               <div className="flex gap-x-3">
-                <a href="https://github.com/vunky-himawan">
+                <a href="https://github.com/vunky-himawan" target="_blank">
                   <div className="i-mdi:github"></div>
                 </a>
-                <a href="https://www.instagram.com/vunkyh">
+                <a href="https://www.instagram.com/vunkyh" target="_blank">
                   <div className="i-mdi:instagram"></div>
                 </a>
-                <a href="https://www.linkedin.com/in/vunky-himawan">
+                <a
+                  href="https://www.linkedin.com/in/vunky-himawan"
+                  target="_blank"
+                >
                   <div className="i-mdi:linkedin"></div>
                 </a>
-                <a href="/assets/Vunky Himawan-resume.pdf">
+                <a href="/assets/Vunky Himawan - CV.pdf" target="_blank">
                   <div className="i-ic:round-description"></div>
                 </a>
               </div>

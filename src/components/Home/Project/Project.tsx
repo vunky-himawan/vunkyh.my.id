@@ -1,11 +1,10 @@
 import type { CollectionEntry } from "astro:content";
-import Heading from "../Heading";
-import Card from "./Components/Card";
+import Heading from "../../Heading";
+import Card from "./components/Card";
 
 type Props = {
   data: CollectionEntry<"projects">[];
 };
-
 
 const Project = ({ data }: Props) => {
   return (

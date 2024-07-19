@@ -1,10 +1,13 @@
 ---
 import Header from "@/components/Header";
-import Home from "@/layouts/Home";
 import Main from "@/layouts/MainLayouts";
 import { getCollection } from "astro:content";
 import { ViewTransitions, fade } from "astro:transitions";
 import SEO from "@/components/SEO";
+import Hero from "@/components/Home/Hero";
+import Why from "@/components/Home/Why/Why";
+import Project from "@/components/Home/Project/Project";
+import Footer from "@/components/Footer";
 
 const projects = await getCollection("projects", ({ data }) => data.featured);
 const sortedProjects = projects.sort(
@@ -26,7 +29,10 @@ const currentPath = Astro.url.pathname;
   <body class="font-satoshi">
     <Main>
       <Header client:visible pathUrl={currentPath} />
-      <Home client:visible projects={sortedProjects} />
+      <Hero client:visible />
+      <Why client:visible />
+      <Project client:visible data={sortedProjects} />
+      <Footer client:visible />
     </Main>
   </body>
 </html>
