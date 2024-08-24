@@ -1,5 +1,5 @@
-import Contact from "./Contact/Contact";
-import FunFact from "./FunFact/FunFact";
+import Contact from "./Home/Contact";
+import FunFact from "./FunFact";
 
 const Footer = () => {
   return (
@@ -19,11 +19,22 @@ const Footer = () => {
               <div className="flex flex-col gap-5">
                 <h1 className="font-semibold text-xl">Social</h1>
                 <div className="flex flex-col gap-2">
-                  <a href="https://github.com/vunkyhimawan19" className="hover:underline">Github</a>
-                  <a href="https://www.linkedin.com/in/vunky-himawan" className="hover:underline">
+                  <a
+                    href="https://github.com/vunkyhimawan19"
+                    className="hover:underline"
+                  >
+                    Github
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/vunky-himawan"
+                    className="hover:underline"
+                  >
                     LinkedIn
                   </a>
-                  <a href="https://www.instagram.com/vunkyhimawan19" className="hover:underline">
+                  <a
+                    href="https://www.instagram.com/vunkyhimawan19"
+                    className="hover:underline"
+                  >
                     Instagram
                   </a>
                 </div>
@@ -35,8 +46,12 @@ const Footer = () => {
               <div className="flex flex-col gap-5">
                 <h1 className="font-semibold text-xl">Pages</h1>
                 <div className="flex flex-col gap-2">
-                  <a href="/" className="hover:underline">Home</a>
-                  <a href="/projects" className="hover:underline">Projects</a>
+                  <a href="/" className="hover:underline">
+                    Home
+                  </a>
+                  <a href="/projects" className="hover:underline">
+                    Projects
+                  </a>
                 </div>
               </div>
             </li>

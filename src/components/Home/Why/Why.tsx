@@ -1,7 +1,7 @@
 import type { ChoosingMeData } from "@/models/choosing-me-data";
 import Card from "./Components/Card";
 import { CHOOSING_ME_DATA } from "@/data/choosing-me-data";
-import Heading from "../Heading";
+import Heading from "../../Heading";
 
 const Why = () => {
   return (

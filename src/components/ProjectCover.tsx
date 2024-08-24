@@ -7,7 +7,7 @@ type Props = {
   setIsLoadingProp?: Function;
 };
 
-const CoverLayout = ({ images, slug, setIsLoadingProp }: Props) => {
+const ProjectCover = ({ images, slug, setIsLoadingProp }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [imageIndex, setImageIndex] = useState(0);
   const [cacheImages, setCacheImages] = useState<Array<string>>([]);
@@ -95,4 +95,4 @@ const CoverLayout = ({ images, slug, setIsLoadingProp }: Props) => {
   );
 };
 
-export default CoverLayout;
+export default ProjectCover;

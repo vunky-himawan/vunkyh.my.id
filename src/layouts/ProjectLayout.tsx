@@ -1,7 +1,7 @@
 import BackButton from "@/components/BackButton";
 import Heading from "@/components/Heading";
 import type { Project } from "@/models/project";
-import CoverLayout from "./CoverLayout";
+import ProjectCover from "../components/ProjectCover";
 import { useState } from "react";
 
 interface Props {
@@ -45,7 +45,7 @@ const ProjectLayout = ({ children, frontmatter, slug }: Props) => {
           </Heading>
           <div className="relative flex flex-col gap-y-5">
             <div className="lg:h-2xl overflow-hidden rounded-2xl">
-              <CoverLayout
+              <ProjectCover
                 images={frontmatter.images}
                 slug={slug}
                 setIsLoadingProp={setIsLoading}
