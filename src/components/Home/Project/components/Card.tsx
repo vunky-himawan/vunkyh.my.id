@@ -34,27 +34,37 @@ const Card = ({ project, slug, colSpan }: Props) => {
             <div className="absolute top-0 left-0 right-0 bottom-0 grid grid-cols-5">
               <div
                 className={`h-0 group-hover:h-full ${
-                  project.type === "personal" ? "bg-red-5/30" : "bg-green-5/30"
+                  project.type === "personal" && "bg-red-5/30"
+                } ${project.type === "campus assignment" && "bg-green-5/30"} ${
+                  project.type === "other" && "bg-blue-5/30"
                 } transition-all duration-300`}
               ></div>
               <div
                 className={`h-0 group-hover:h-full ${
-                  project.type === "personal" ? "bg-red-5/30" : "bg-green-5/30"
+                  project.type === "personal" && "bg-red-5/30"
+                } ${project.type === "campus assignment" && "bg-green-5/30"} ${
+                  project.type === "other" && "bg-blue-5/30"
                 } transition-all duration-300 transition-delay-50`}
               ></div>
               <div
                 className={`h-0 group-hover:h-full ${
-                  project.type === "personal" ? "bg-red-5/30" : "bg-green-5/30"
+                  project.type === "personal" && "bg-red-5/30"
+                } ${project.type === "campus assignment" && "bg-green-5/30"} ${
+                  project.type === "other" && "bg-blue-5/30"
                 } transition-all duration-300 transition-delay-100`}
               ></div>
               <div
                 className={`h-0 group-hover:h-full ${
-                  project.type === "personal" ? "bg-red-5/30" : "bg-green-5/30"
+                  project.type === "personal" && "bg-red-5/30"
+                } ${project.type === "campus assignment" && "bg-green-5/30"} ${
+                  project.type === "other" && "bg-blue-5/30"
                 } transition-all duration-300 transition-delay-150`}
               ></div>
               <div
                 className={`h-0 group-hover:h-full ${
-                  project.type === "personal" ? "bg-red-5/30" : "bg-green-5/30"
+                  project.type === "personal" && "bg-red-5/30"
+                } ${project.type === "campus assignment" && "bg-green-5/30"} ${
+                  project.type === "other" && "bg-blue-5/30"
                 } transition-all duration-300 transition-delay-200`}
               ></div>
             </div>
@@ -67,9 +77,12 @@ const Card = ({ project, slug, colSpan }: Props) => {
                 </h4>
                 <h5
                   className={`w-fit ${
-                    project.type === "personal"
-                      ? "bg-red-600/15 text-red-500"
-                      : "bg-green-600/15 text-green-500"
+                    project.type === "personal" && "bg-red-600/15 text-red-500"
+                  } ${
+                    project.type === "campus assignment" &&
+                    "bg-green-600/15 text-green-500"
+                  } ${
+                    project.type === "other" && "bg-blue-600/15 text-blue-500"
                   } py-2 px-3 font-normal text-base rounded-full`}
                 >
                   {project.type}

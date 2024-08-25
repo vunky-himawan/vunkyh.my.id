@@ -34,9 +34,13 @@ const ProjectLayout = ({ children, frontmatter, slug }: Props) => {
             <div className="w-full mt-2">
               <h5
                 className={`w-fit py-2 px-3 ${
-                  frontmatter.type === "personal"
-                    ? "bg-red-600/15 text-red-500"
-                    : "bg-green-600/15 text-green-500"
+                  frontmatter.type === "personal" &&
+                  "bg-red-600/15 text-red-500"
+                } ${
+                  frontmatter.type === "campus assignment" &&
+                  "bg-green-600/15 text-green-500"
+                } ${
+                  frontmatter.type === "other" && "bg-blue-600/15 text-blue-500"
                 }  text-base rounded-full capitalize`}
               >
                 {frontmatter.type}
