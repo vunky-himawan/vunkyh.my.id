@@ -8,7 +8,7 @@ const projectCollection = defineCollection({
     demo: z.string().nullable().default(null),
     source: z.string(),
     images: z.array(z.string()),
-    type: z.enum(["personal", "campus assignment"]),
+    type: z.enum(["personal", "campus assignment", "other"]),
     stack: z.array(z.tuple([z.string(), z.string(), z.string()])),
     featured: z.boolean().default(false),
   }),

@@ -1,0 +1,115 @@
+---
+title: Quizin
+date: Aug - 2024
+description: This repository is a simple quiz app, this is a challenge given by DOT Indonesia to fulfill the internship requirement of making a quiz app using React.
+demo:
+source: https://github.com/vunky-himawan/quizin
+type: other
+featured: true
+images: ["quizin-cover.webp", "quizin-logo.webp", "quizin-mockup.webp"]
+stack:
+  - ["React", "https://reactjs.org/", "i-logos:react"]
+  - ["Tailwind CSS", "https://tailwindcss.com/", "i-logos:tailwindcss"]
+  - [
+      "Shadcn Ui",
+      "https://ui.shadcn.com/",
+      "i-simple-icons:shadcnui text-black",
+    ]
+  - ["TypeScript", "https://www.typescriptlang.org/", "i-logos:typescript"]
+  - ["Node.js", "https://nodejs.org/", "i-logos:nodejs"]
+  - [
+      "Express.js",
+      "https://expressjs.com/",
+      "i-simple-icons:express text-black",
+    ]
+  - [
+      "Drizzle ORM",
+      "https://orm.drizzle.team/",
+      "i-simple-icons:drizzle text-lime-500",
+    ]
+  - ["MySQL", "https://www.mysql.com/", "i-logos:mysql"]
+---
+
+## Overview
+
+Quizin is a simple quiz application that allows users to take and view quiz results. Quizin uses API from Open Trivia DB. Quizin is a challenge given by DOT Indonesia to fulfill the internship requirements in creating a quiz application using React.
+
+## Features
+
+- **User Authentication**: Users can sign up and log in using their username and password.
+- **Doing Quiz**: Users can take a quiz and view the results.
+- **Quiz Results**: Users can view their quiz.
+- **Memoization**: If the user suddenly closes the browser the quiz data will still be saved and when the user returns it can immediately resume the previous quiz.
+
+## Challenges
+
+- **User authentication:** Because this is my full stack application where previously I was only a front end, in this project I tried to work as a full stack developer so user authentication is a challenge that I think is quite difficult because this feature involves the access rights of each user.
+
+## Learning Outcomes
+
+In this project, I learned about how to use the API that I built myself using expressjs, and I learned to use the database ORM, drizzle orm.
+
+## Installation & Usage
+
+To run the project locally:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/vunky-himawan/quizin.git
+```
+
+2. Install dependencies:
+
+```
+npm install
+```
+
+3. Create a .env file and add your database credentials.
+
+```
+cp .env.example .env
+```
+
+4. Add your secret key in the .env file.
+
+```
+ACCESS_TOKEN=example
+JWT_SECRET=example
+```
+
+5. Create a database and add the database credentials in the .env file.
+
+```
+APP_PORT=3000
+
+DB_HOST=localhost
+DB_USERNAME=example
+DB_PASSWORD=example
+DB_DATABASE=example
+DB_URL="mysql://username:password@127.0.0.1:3306/database"
+```
+
+6. Run migrations:
+
+```
+npx drizzle-kit migrate
+```
+
+7. Run seeder:
+
+```
+npm run db:seed
+```
+
+8. Install front end dependencies:
+
+```
+cd src/frontend && npm install
+```
+
+9. Start the app:
+
+```
+npm run dev
+```
