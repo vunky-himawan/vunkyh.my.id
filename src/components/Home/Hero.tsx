@@ -64,10 +64,10 @@ const Hero = () => {
             {!isLoading && (
               <>
                 <div className="absolute top-4 -right-3 bg-red-5 p-2 text-white rounded-md rotate-30 text-[0.7rem] md:text-[1rem] z-2 lg:scale-0 lg:group-hover:scale-100 transition-all duration-300">
-                  <h1>Frontend Web Developer</h1>
+                  <h1>Junior Frontend Web Developer</h1>
                 </div>
                 <div className="absolute bottom-4 -left-3 bg-red-5 p-2 text-white rounded-md rotate-30 text-[0.7rem] md:text-[1rem] z-2 lg:scale-0 lg:group-hover:scale-100 transition-all duration-300">
-                  <h1>Web Designer</h1>
+                  <h1>Junior Backend Developer</h1>
                 </div>
                 <img
                   src={medias[image]}
