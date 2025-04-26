@@ -1,5 +1,5 @@
-# vunkyh.my.id
+# **Portfolio by Once UI**
 
-simple personal website mwehehehehe
+![Portfolio](https://github.com/user-attachments/assets/b473f6a9-1704-4d66-8b77-ffc6228b4f42)
 
-![Web Page](https://github.com/vunky-himawan/vunkyh.my.id/assets/69801752/c3d82300-13a7-43bf-8ad6-ecef27ec136c)
+Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.

@@ -1,182 +1,178 @@
-import { useState } from "react";
-import HeaderMenu from "./HeaderMenu";
-import Marquee from "./Marquee";
+"use client";
 
-type Props = {
-  pathUrl: string;
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+import { Fade, Flex, Line, ToggleButton } from "@/once-ui/components";
+import styles from "@/components/Header.module.scss";
+
+import { routes, display } from "@/app/resources";
+import { person, about, blog, work } from "@/app/resources/content";
+import { ThemeToggle } from "./ThemeToggle";
+
+type TimeDisplayProps = {
+  timeZone: string;
+  locale?: string; // Optionally allow locale, defaulting to 'en-GB'
 };
 
-const Header = ({ pathUrl }: Props = { pathUrl: "/" }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [hoveredMenu, setHoveredMenu] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
+const TimeDisplay: React.FC<TimeDisplayProps> = ({
+  timeZone,
+  locale = "en-GB",
+}) => {
+  const [currentTime, setCurrentTime] = useState("");
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      };
+      const timeString = new Intl.DateTimeFormat(locale, options).format(now);
+      setCurrentTime(timeString);
+    };
 
-  const handleMouseEnter = (menu: string, isHovered: boolean) => {
-    setIsHovered(isHovered);
-    setHoveredMenu(menu);
-  };
+    updateTime();
+    const intervalId = setInterval(updateTime, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [timeZone, locale]);
+
+  return <>{currentTime}</>;
+};
+
+export default TimeDisplay;
+
+export const Header = () => {
+  const pathname = usePathname() ?? "";
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 p-5 z-11 flex items-center justify-end gap-x-5 w-screen max-w-7xl mx-auto">
-        <div className=" rounded-full py-2 px-5 bg-white/10 w-fit backdrop-blur-3xl ">
-          <a href="/" className="text-lg">
-            <span className="font-bold font-cabinet">Vunky</span> Himawan
-          </a>
-        </div>
-        <div className="rounded-full py-2 px-5 bg-white/10 w-fit backdrop-blur-3xl lg:hidden">
-          <button onClick={toggleMenu} className="text-lg">
-            {isOpen ? "Close" : "Menu"}
-          </button>
-        </div>
-        <div className="rounded-full py-2 bg-white/10 w-[6rem] backdrop-blur-3xl max-lg:hidden overflow-hidden">
-          <a
-            href="/"
-            onMouseEnter={() => handleMouseEnter("Home", true)}
-            onMouseLeave={() => handleMouseEnter("", false)}
-            className={`flex gap-x-2  ${pathUrl === "/" ? "underline" : ""}`}
+      <Fade hide="s" fillWidth position="fixed" height="80" zIndex={9} />
+      <Fade
+        show="s"
+        fillWidth
+        position="fixed"
+        bottom="0"
+        to="top"
+        height="80"
+        zIndex={9}
+      />
+      <Flex
+        fitHeight
+        position="unset"
+        className={styles.position}
+        as="header"
+        zIndex={9}
+        fillWidth
+        padding="8"
+        horizontal="center"
+        data-border="rounded"
+      >
+        <Flex
+          paddingLeft="12"
+          fillWidth
+          vertical="center"
+          textVariant="body-default-s"
+        >
+          {display.location && <Flex hide="s">{person.location}</Flex>}
+        </Flex>
+        <Flex fillWidth horizontal="center">
+          <Flex
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="m-4"
+            shadow="l"
+            padding="4"
+            horizontal="center"
+            zIndex={1}
           >
-            {((isHovered && hoveredMenu !== "Home") ||
-              (!isHovered && pathUrl !== "/")) && (
-              <>
-                <div className="w-full flex justify-center items-center">
-                  <div className="flex flex-shrink-0 gap-x-2 justify-center items-center">
-                    Home
-                    <div
-                      className={`i-ic:round-call-made text-sm ${
-                        pathUrl === "/" ? "rotate-180" : ""
-                      }`}
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-            {((!isHovered && pathUrl === "/") || hoveredMenu === "Home") && (
-              <>
-                <Marquee>
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+            <Flex gap="4" vertical="center" textVariant="body-default-s">
+              {routes["/"] && (
+                <ToggleButton
+                  prefixIcon="home"
+                  href="/"
+                  selected={pathname === "/"}
+                />
+              )}
+              <Line background="neutral-alpha-medium" vert maxHeight="24" />
+              {routes["/about"] && (
+                <>
+                  <ToggleButton
+                    className="s-flex-hide"
+                    prefixIcon="person"
+                    href="/about"
+                    label={about.label}
+                    selected={pathname === "/about"}
                   />
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+                  <ToggleButton
+                    className="s-flex-show"
+                    prefixIcon="person"
+                    href="/about"
+                    selected={pathname === "/about"}
                   />
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+                </>
+              )}
+              {routes["/work"] && (
+                <>
+                  <ToggleButton
+                    className="s-flex-hide"
+                    prefixIcon="grid"
+                    href="/work"
+                    label={work.label}
+                    selected={pathname.startsWith("/work")}
                   />
-                </Marquee>
-                <Marquee>
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+                  <ToggleButton
+                    className="s-flex-show"
+                    prefixIcon="grid"
+                    href="/work"
+                    selected={pathname.startsWith("/work")}
                   />
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+                </>
+              )}
+              {routes["/blog"] && (
+                <>
+                  <ToggleButton
+                    className="s-flex-hide"
+                    prefixIcon="book"
+                    href="/blog"
+                    label={blog.label}
+                    selected={pathname.startsWith("/blog")}
                   />
-                  Home
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/" ? "rotate-180" : ""
-                    }`}
+                  <ToggleButton
+                    className="s-flex-show"
+                    prefixIcon="book"
+                    href="/blog"
+                    selected={pathname.startsWith("/blog")}
                   />
-                </Marquee>
-              </>
-            )}
-          </a>
-        </div>
-        <div className="rounded-full py-2 bg-white/10 w-[8rem] backdrop-blur-3xl max-lg:hidden overflow-hidden">
-          <a
-            href="/projects"
-            onMouseEnter={() => handleMouseEnter("Projects", true)}
-            onMouseLeave={() => handleMouseEnter("", false)}
-            className={`flex gap-x-2  ${
-              pathUrl === "/projects" ? "underline" : ""
-            }`}
+                </>
+              )}
+              {display.themeSwitcher && (
+                <>
+                  <Line background="neutral-alpha-medium" vert maxHeight="24" />
+                  <ThemeToggle />
+                </>
+              )}
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex fillWidth horizontal="end" vertical="center">
+          <Flex
+            paddingRight="12"
+            horizontal="end"
+            vertical="center"
+            textVariant="body-default-s"
+            gap="20"
           >
-            {((isHovered && hoveredMenu !== "Projects") ||
-              (!isHovered && pathUrl !== "/projects")) && (
-              <>
-                <div className="w-full flex justify-center items-center">
-                  <div className="flex flex-shrink-0 gap-x-2 justify-center items-center">
-                    Projects
-                    <div
-                      className={`i-ic:round-call-made text-sm ${
-                        pathUrl === "/projects" ? "rotate-180" : ""
-                      }`}
-                    />
-                  </div>
-                </div>
-              </>
-            )}
-            {((!isHovered && pathUrl === "/projects") ||
-              hoveredMenu === "Projects") && (
-              <>
-                <Marquee>
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                </Marquee>
-                <Marquee>
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                  Projects
-                  <div
-                    className={`i-ic:round-call-made text-sm ${
-                      pathUrl === "/projects" ? "rotate-180" : ""
-                    }`}
-                  />
-                </Marquee>
-              </>
-            )}
-          </a>
-        </div>
-      </header>
-
-      <HeaderMenu isActive={isOpen} pathUrl={pathUrl} />
+            <Flex hide="s">
+              {display.time && <TimeDisplay timeZone={person.location} />}
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
     </>
   );
 };
-
-export default Header;
