@@ -1,0 +1,113 @@
+---
+title: "The First Impression With GraphQL"
+publishedAt: "2025-04-24"
+summary: "Bikin API Jadi Simpel: The First Impression With GraphQL"
+tag: ["GraphQL", "REST", "API"]
+image: "https://josipmisko.com/img/rest-api/rest-vs-graphql.webp"
+imageFrom: "RatanaSOTH"
+---
+
+# Bikin API Jadi Simpel: The First Impression With GraphQL
+
+Jujur, aku udah cukup sering pake REST buat bikin API. Tiap hari ketemu endpoint, nulis route, trus ngatur-ngatur respon. Tapi lama-lama kok rasanya bosen, pengin nyobain sesuatu yang baru. Terus aku denger tentang GraphQL. Buat yang belum tahu, GraphQL itu kayak cara bikin API yang cuma pake satu endpoint, trus kita bisa minta data sesuka hati lewat query - ga kaya REST yang tiap fitur butuh rute sendiri. Keren, kan? Awalnya aku bingung, lah, ini kok katanya cuma pake satu endpoint? Bayanganku sih simpel aja waktu itu: ya paling cuma beda bentuk responnya doang, ga jauh-jauh amat. Eh, ternyata pas nyoba explore ternyata lebih seru dari yang aku kira!
+
+## Kenapa REST Mulai Bikin Jenuh
+
+Awalnya sih cuma iseng. Tiba-tiba kok banyak banget yang ngomongin GraphQL di LinkedIn, postingan di instagram, sampe timeline X. Aku yang udah sering pakai REST jadi kepo - ini apaan sih kok kayaknya seru kalau di coba? REST emang udah jadi comfort zone, tapi lama-lama bosen juga jadi pengen coba hal baru. Endpoint-nya bejibun, tiap fitur kecil harus bikin rute baru, belum lagi kalau frontend sama backend ga sinkron, pusing sendiri. Terus aku denger GraphQL ini strong type - datanya jelas banget dari awal, ga kayak REST yang kadang tebak-tebakan. Plus, katanya lebih simpel dan fleksibel. Ikut tren juga sih, soalnya sebagai orang IT ya harus update dong, ga mau ketinggalan. Pas aku nonton video YouTube, ternyata ada sisi lain: request per second-nya lebih rendah dari REST sama gRPC, latency-nya lebih tinggi, memory usage-nya juga gedean. Tapi anehnya, CPU sama client network usage-nya malah lebih hemat. Wah, ini kok menarik! Tapi setelah mikir lagi, aku setuju sama pendapat salah satu penonton, @apidas, yang komentar gini:
+
+> you're joking right? rest, graphql and grpc are api standards. you can't compare performance between them, only to compare their implementation.
+
+Bener juga sih, aku jadi sadar - mungkin yang aku lihat ini lebih ke soal implementasinya, bukan standarnya langsung. Apalagi aku yang biasa jadi frontend - cuma bisa backend dikit-dikit buat CRUD - jadi penasaran banget: satu endpoint doang tuh gimana caranya? Frontend minta data kayak apa? Backend nyiapinnya gimana? Dari situ, petualangan beneran dimulai.
+
+## Nyobain GraphQL
+
+Aku mulai petualangan ini dengan modal nekat. Pertama-tama, ya tanya-tanya ke AI aja - 'GraphQL tuh apa sih?' - abis itu aku coba bikin project kecil pake NestJS di backend sama Svelte di frontend. Awalnya sih aku kepo banget sama gRPC, soalnya katanya cepet, tapi pas aku baca-baca, ternyata gRPC dan NATS lebih cocok buat kasus server ngobrol sama server seperti microservice. Ya udah, aku balik lagi ke GraphQL - yang katanya lagi hot - dan mutusin bikin monolith pake NestJS. Pas nyoba, bingungnya minta ampun. Query-nya kok gini?
+
+```graphql
+query {
+  todos {
+    id
+    title
+    completed
+  }
+}
+```
+
+Ini apa maksudnya? Ini schema pertamaku, aku bikin tipe sederhana:
+
+```ts
+type Todo {
+  id: ID!
+  title: String!
+  completed: Boolean!
+}
+
+type Query {
+  todos: [Todo!]!
+}
+```
+
+Pas nulis query ini, aku bingung banget, tapi begitu jalan, semua todo langsung keluar rapi! Terus ada resolver, aku mikir, 'Ini ngapain sih?'
+
+```ts
+@Resolver("Todo")
+export class TodoResolver {
+  constructor(private readonly todoService: TodoService) {}
+
+  @Query(() => [Todo])
+  async todos() {
+    return this.todoService.getAllTodos();
+  }
+}
+```
+
+Awalnya ga ngerti ini buat apa, tapi pas nyambung ke service, ternyata cuma **gitu doang** wkwkwk - ga perlu rute macem-macem! Di frontend juga kaget, bodynya kok beda banget - bukan JSON biasa kayak REST, tapi harus nulis query dulu. Pusing deh awalnya.
+
+## Ketika API Jadi Simpel
+
+Pas aku coba GraphQL beneran, ada momen yang bikin aku takjub banget. Dulu pake REST sama React, aku harus ribet nentuin method - GET buat ini, POST buat itu - terus assign value ke variabel kadang bikin pusing, apalagi kalau datanya nested. Eh, pas nyoba GraphQL, behhh, simpel banget! Mau ambil data tinggal nulis query, mau kirim data pake mutation - udah, gitu doang. Contohnya di Svelte, aku bikin ini buat nambah todo:
+
+```svelte
+const CREATE_TODO = graphql(`
+  mutation CreateTodo($title: String!) {
+    createTodo(title: $title) {
+      id
+      title
+      completed
+    }
+  }
+`);
+
+let title = '';
+async function addTodo() {
+  const response = await CREATE_TODO({ title });
+  console.log('Todo baru:', response.data.createTodo);
+  title = '';
+}
+```
+
+Tinggal kirim title, datanya langsung balik - ga perlu ribet method POST atau ngecek endpoint! Ga ada drama bolak-balik ngecek endpoint atau salah method. Terus dari sisi NestJS-nya, ini yang bikin aku makin seneng. Biasanya di REST aku harus bikin endpoint satu-satu - /todos, /todos/:id, /todos/create, cape deh. Di GraphQL? Cukup bikin schema, resolver, sama service - jadi deh! Bandingin nih:
+
+```bash
+# REST
+GET /todos
+GET /todos/1
+POST /todos/create
+
+# GraphQL
+query { todos { id title } }
+```
+
+Apalagi buat aku yang di backend cuma bisa CRUD (haha, jangan judge ya), ini pas banget. Ga perlu mikirin rute macem-macem, semua kebutuhan CRUD aku selesai cuma lewat satu endpoint. Bandingin sama REST, aku cuma bisa bilang, 'Duh, kenapa ga dari dulu pake ini?' Lega rasanya, soalnya frontend jadi mandiri banget - mau data apa tinggal minta, ga usah ganggu backend. Takjub, seneng, semua campur aduk. Apalagi ini pengalaman pertama aku main sama teknologi baru kayak GraphQL, NestJS, sama Svelte - rasanya kayak naik level wkwkw!
+
+## Tantangan di Jalan: Batu Sandungan Pertama
+
+Jujur, di GraphQL-nya sendiri aku belum ketemu kesusahan yang parah. Soalnya apa? "Projectku cuma todolist - haha", jangan hujat ya, project sejuta umat ini emang penutup dosa buat pemula kayak aku. Query sama mutation-nya sih aman, resolver juga masih gitu-gitu aja, ga bikin aku garuk-garuk kepala. Tapi cerita berubah pas aku nyetel environment-nya. NestJS sama Drizzle ORM, terus Svelte di frontend - ini nih yang bikin aku keringet dingin. Setup-nya ribet banget! Aku bingung nyambungin Drizzle ke database. Belum lagi konfigurasi NestJS-nya - aku sampe lupa berapa kali aku typo di module.ts. Stuck? Belum sampe ke titik bikin aku bener-bener buntu sih, "lagi-lagi karena cuma todolist" - ga terlalu kompleks. Tapi buat ngatasin ribetnya setup ini, aku punya temen setia: AI. Aku males baca tutorial panjang atau nonton video berjam-jam, makanya aku tanya langsung ke AI. Enaknya, dia kasih jawaban to the point - 'Ubah ini', 'Coba gitu' - langsung beres. Kecuali kalau AI-nya udah angkat tangan, ya aku pasrah aja, tapi untungnya belum sampe situ!
+
+## API yang Lebih Simpel
+
+Setelah nyoba GraphQL lewat todolistku yang sederhana ini, aku bisa bilang satu hal: "simpel banget". Buat aku yang levelnya masih developer 'pake-pake aja', GraphQL rasanya pas - ga perlu pusing mikirin detail ribet. Aku belum sampe ke tahap bisa analisis dampaknya sih, apakah beneran lebih baik dari REST atau malah lebih buruk di kasus tertentu. Tapi yang jelas, aku suka banget sama efisiensinya. Bikin API jadi ga perlu bingung kasih nama endpoint yang biasanya bejibun - /getUsers, /createUser, /updateUser - capek deh. Di GraphQL, satu schema, satu resolver, selesai. Pelajaran dari percobaan kali ini? Ternyata bikin API efisien itu ga sesulit yang aku bayangin, asal setup-nya ga bikin nyanyi dulu. Dan sekarang, aku lagi nyiapin langkah besar berikutnya: project management app. Bukan todolist lagi ya, ini serius - pengen ada fitur realtime, notifikasi, sama kompleksitas lain yang bikin aku bisa bener-bener nguji GraphQL. Aku penasaran banget apa kekurangannya, soalnya selama ini cuma lihat sisi enaknya doang. Jadi, petualangan ini belum selesai - malah baru mulai!
+
+## Tips buat Pembaca yang Mau Ikut Berpetualang
+
+Petualangan pertamaku sama GraphQL ini bikin aku sadar: kadang kita harus nyemplung dulu baru ngerti rasanya. Buat kamu yang pengin coba GraphQL, ini tips dari aku. Pertama, berani nyoba aja - urusan bagus atau engganya pikir belakangan, yang penting kita dapet pelajaran baru. Kedua, mulai dari project kecil kayak todolistku, biar ga langsung pusing sama query atau resolver. Ketiga, kalau males baca dokumentasi (aku banget nih), pake aja AI - kayak Grok, ChatGPT, Deepseek dan lain-lain. GraphQL emang bikin API jadi simpel, tapi petualangannya tetep butuh keberanian dan temen cerdas. Jadi, ayo bikin projectmu sendiri, trus ceritain pengalamanmu di kolom komentar - aku penasaran apa yang bakal kamu temuin!🚀
