@@ -34,7 +34,7 @@ export const techStacks: TechStack[] = [
   },
   {
     name: "Gitlab",
-    icon: "Gitlab.svg",
+    icon: "GitLab.svg",
   },
   {
     name: "GraphQL",
@@ -42,7 +42,7 @@ export const techStacks: TechStack[] = [
   },
   {
     name: "Javascript",
-    icon: "Javascript.svg",
+    icon: "JavaScript.svg",
   },
   {
     name: "Laravel",
