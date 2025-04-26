@@ -15,7 +15,7 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Subscribe to {person.firstName}&apos;s Newsletter</>,
   description: (
     <>
       I explore technology, and the fusion of creativity and engineering through
@@ -63,7 +63,7 @@ const home = {
   },
   subline: (
     <>
-      Hi, I'm Vunky Himawan from Malang, Indonesia, a TypeScript fullstack
+      Hi, I&apos;m Vunky Himawan from Malang, Indonesia, a TypeScript fullstack
       wizard, spinning code spells with AI sidekicks and coffee potions—without
       AI, I’d be stuck untangling my own bugs in a coffee-fueled haze!
       <br />
@@ -95,10 +95,10 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        I'm a full-stack web developer with a knack for TypeScript, crafting
-        responsive UIs using React/Next.js and TailwindCSS, and building robust
-        APIs with NestJS and ExpressJS. I’ve dipped my toes into mobile
-        development and machine learning, but my curiosity for tech runs
+        I&apos;m a full-stack web developer with a knack for TypeScript,
+        crafting responsive UIs using React/Next.js and TailwindCSS, and
+        building robust APIs with NestJS and ExpressJS. I’ve dipped my toes into
+        mobile development and machine learning, but my curiosity for tech runs
         deep—always wondering why things work and how to make them better. I’m
         constantly exploring new tools, ideas, and solutions, driven by a
         passion for creating efficient, scalable, and user-focused digital
@@ -215,14 +215,15 @@ const about = {
         title: "Backend",
         description: (
           <>
-            I'm a beginner backend engineer with experience in Laravel for
+            I&apos;m a beginner backend engineer with experience in Laravel for
             PHP-based development, and TypeScript-based frameworks like Express
             and NestJS for building APIs. I’m also familiar with SQL databases,
             working with MySQL and handling basic database queries and
             relationships.
             <Line vertical="center" color="brand" marginY="4" />
-            Currently, I'm learning how to build a backend API with NestJS and
-            I'm excited to dive into the world of modern web development.
+            Currently, I&apos;m learning how to build a backend API with NestJS
+            and I&apos;m excited to dive into the world of modern web
+            development.
           </>
         ),
         images: [],
@@ -231,13 +232,13 @@ const about = {
         title: "Frontend",
         description: (
           <>
-            I'm a frontend developer skilled in React and Next.js with
-            TypeScript, currently focusing on optimizing React performance. I'm
-            also exploring Vue and Svelte to broaden my frontend toolkit and
-            deepen my understanding of modern web frameworks.
+            I&apos;m a frontend developer skilled in React and Next.js with
+            TypeScript, currently focusing on optimizing React performance.
+            I&apos;m also exploring Vue and Svelte to broaden my frontend
+            toolkit and deepen my understanding of modern web frameworks.
             <Line vertical="center" color="brand" marginY="4" />
-            Currently, I'm learning NuxtJS and Svelte-Kit, and I'm excited to
-            dive into the world of modern web development.
+            Currently, I&apos;m learning NuxtJS and Svelte-Kit, and I&apos;m
+            excited to dive into the world of modern web development.
           </>
         ),
         images: [],
