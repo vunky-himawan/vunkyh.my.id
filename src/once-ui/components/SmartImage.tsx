@@ -16,6 +16,7 @@ export interface SmartImageProps extends React.ComponentProps<typeof Flex> {
   unoptimized?: boolean;
   sizes?: string;
   priority?: boolean;
+  grayscale?: boolean;
 }
 
 const SmartImage: React.FC<SmartImageProps> = ({
@@ -29,6 +30,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   unoptimized = false,
   priority,
   sizes = "100vw",
+  grayscale = false,
   ...rest
 }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
@@ -102,7 +104,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
 
   const getYouTubeEmbedUrl = (url: string) => {
     const match = url.match(
-      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
     );
     return match
       ? `https://www.youtube.com/embed/${match[1]}?controls=0&rel=0&modestbranding=1`
@@ -123,6 +125,9 @@ const SmartImage: React.FC<SmartImageProps> = ({
         style={{
           outline: "none",
           isolation: "isolate",
+          filter: grayscale ? "grayscale(100%)" : undefined,
+          msFilter: grayscale ? "grayscale(100%)" : undefined,
+          WebkitFilter: grayscale ? "grayscale(100%)" : undefined,
           height: aspectRatio ? "" : height ? `${height}rem` : "100%",
           aspectRatio,
           borderRadius: isEnlarged ? "0" : undefined,
@@ -199,7 +204,9 @@ const SmartImage: React.FC<SmartImageProps> = ({
               height: "100vh",
               transform: "translate(-50%, -50%)",
             }}
-            onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+              e.stopPropagation()
+            }
           >
             {isVideo ? (
               <video
