@@ -1,12 +1,12 @@
 .hover {
-  border: 1px solid var(--static-transparent);
+    border: 1px solid var(--static-transparent);
 
-  &:hover {
-    border: 1px solid var(--neutral-alpha-medium);
-  }
+    &:hover {
+        border: 1px solid var(--neutral-alpha-medium);
+    }
 }
 
 .image {
-  transition: var(--transition-micro-medium);
-  transform: scale(1);
+    transition: var(--transition-micro-medium);
+    transform: scale(1);
 }

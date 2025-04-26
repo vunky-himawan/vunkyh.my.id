@@ -12,9 +12,7 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }));
 
-  const activeRoutes = Object.keys(routesConfig).filter(
-    (route) => routesConfig[route as keyof typeof routesConfig]
-  );
+  const activeRoutes = Object.keys(routesConfig).filter((route) => routesConfig[route as keyof typeof routesConfig]);
 
   const routes = activeRoutes.map((route) => ({
     url: `https://${baseURL}${route !== "/" ? route : ""}`,

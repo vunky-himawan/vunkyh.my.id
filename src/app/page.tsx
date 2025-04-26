@@ -10,6 +10,7 @@ import {
   Column,
   Badge,
   Row,
+  Grid,
 } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
 
@@ -18,7 +19,7 @@ import { home, about, person, newsletter } from "@/app/resources/content";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
-import BentoGrid from "@/components/bento/techstack/main";
+import TechStackBentoItem from "@/components/techstack/tech-stack";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -46,14 +47,13 @@ export default function Home() {
         }}
       />
       <Column fillWidth paddingY="24" gap="m">
-        <Column maxWidth="m">
+        <Column maxWidth="l">
           {home.featured && (
             <RevealFx
               fillWidth
               horizontal="start"
               paddingTop="16"
               paddingBottom="32"
-              paddingLeft="12"
             >
               <Badge
                 background="brand-alpha-weak"
@@ -74,7 +74,7 @@ export default function Home() {
             horizontal="start"
             paddingBottom="16"
           >
-            <Heading wrap="balance" variant="display-strong-l">
+            <Heading wrap="pretty" variant="display-strong-l">
               {home.headline}
             </Heading>
           </RevealFx>
@@ -86,7 +86,7 @@ export default function Home() {
             paddingBottom="32"
           >
             <Text
-              wrap="balance"
+              wrap="pretty"
               onBackground="neutral-weak"
               variant="heading-default-xl"
             >
@@ -122,8 +122,11 @@ export default function Home() {
         </Column>
       </Column>
       <RevealFx translateY="16" delay={0.6}>
-        <BentoGrid />
-        {/* <Projects range={[1, 1]} /> */}
+        <Grid rows={1} fillWidth columns={1} gap="l">
+          <Column fillWidth>
+            <TechStackBentoItem />
+          </Column>
+        </Grid>
       </RevealFx>
       {routes["/blog"] && (
         <Flex fillWidth gap="24" mobileDirection="column">
@@ -137,7 +140,7 @@ export default function Home() {
           </Flex>
         </Flex>
       )}
-      <Projects range={[1, 3]} />
+      <Projects range={[1, 2]} />
       {newsletter.display && <Mailchimp newsletter={newsletter} />}
     </Column>
   );
