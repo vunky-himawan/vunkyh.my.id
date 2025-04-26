@@ -1,0 +1,34 @@
+---
+import Main from "@/layouts/MainLayouts";
+import { ViewTransitions, fade } from "astro:transitions";
+import { getCollection } from "astro:content";
+import ProjectsLayout from "@/layouts/ProjectsLayout";
+import SEO from "@/components/SEO";
+
+const projects = await getCollection("projects");
+
+const sortedProjects = projects.sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+---
+
+<!doctype html>
+<html lang="en" transition:animate={fade({ duration: "1s" })}>
+  <head>
+    <SEO
+      pageTitle="Vunky Himawan | Projects"
+      description="As a junior front-end web developer and web designer, I've worked on exciting projects showcasing my skills in coding and design. Each project reflects my creativity and dedication to building beautiful, functional web experiences."
+      pathName={Astro.url.pathname}
+    />
+    <ViewTransitions />
+  </head>
+  <body class="font-satoshi">
+    <Main>
+      <ProjectsLayout
+        client:visible
+        sortedProjects={sortedProjects}
+        pathURL={Astro.url.pathname}
+      />
+    </Main>
+  </body>
+</html>
