@@ -19,7 +19,6 @@ import { home, about, person, newsletter } from "@/app/resources/content";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { Meta, Schema } from "@/once-ui/modules";
-import TechStackBentoItem from "@/components/techstack/tech-stack";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -121,13 +120,6 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
-        <Grid rows={1} fillWidth columns={1} gap="l">
-          <Column fillWidth>
-            <TechStackBentoItem />
-          </Column>
-        </Grid>
-      </RevealFx>
       {routes["/blog"] && (
         <Flex fillWidth gap="24" mobileDirection="column">
           <Flex flex={1} paddingLeft="l" paddingTop="24">
