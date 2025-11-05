@@ -1,182 +1,91 @@
-import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import React, { ReactNode } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-import { 
-  Heading,
-  HeadingLink,
-  SmartImage,
-  SmartLink,
-  Text,
-  InlineCode,
-} from "@/once-ui/components";
-import { CodeBlock } from "@/once-ui/modules/code/CodeBlock";
-import { TextProps } from "@/once-ui/interfaces";
-import { SmartImageProps } from "@/once-ui/components/SmartImage";
+function Table({ data }: { data: { headers: string[]; rows: string[][] } }) {
+  let headers = data.headers.map((header, index) => (
+    <th key={index}>{header}</th>
+  ));
+  let rows = data.rows.map((row, index) => (
+    <tr key={index}>
+      {row.map((cell, cellIndex) => (
+        <td key={cellIndex}>{cell}</td>
+      ))}
+    </tr>
+  ));
 
-type CustomLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
-  children: ReactNode;
-};
+  return (
+    <table>
+      <thead>
+        <tr>{headers}</tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+}
 
-function CustomLink({ href, children, ...props }: CustomLinkProps) {
+function CustomLink(props: any) {
+  let href = props.href;
+
   if (href.startsWith("/")) {
     return (
-      <SmartLink href={href} {...props}>
-        {children}
-      </SmartLink>
+      <Link href={href} {...props}>
+        {props.children}
+      </Link>
     );
   }
 
   if (href.startsWith("#")) {
-    return (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    );
+    return <a {...props} />;
   }
 
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
-      {children}
-    </a>
-  );
+  return <a target="_blank" rel="noopener noreferrer" {...props} />;
 }
 
-function createImage({ alt, src, ...props }: SmartImageProps & { src: string }) {
-  if (!src) {
-    console.error("SmartImage requires a valid 'src' property.");
-    return null;
-  }
-
-  return (
-    <SmartImage
-      marginTop="8"
-      marginBottom="16"
-      enlarge
-      radius="m"
-      aspectRatio="16 / 9"
-      border="neutral-alpha-medium"
-      sizes="(max-width: 960px) 100vw, 960px"
-      alt={alt}
-      src={src}
-      {...props}
-    />
-  );
+function RoundedImage(props: any) {
+  return <Image alt={props.alt} className="rounded-lg" {...props} />;
 }
 
-function slugify(str: string): string {
+// This replaces rehype-slug
+function slugify(str: string) {
   return str
+    .toString()
     .toLowerCase()
+    .trim() // Remove whitespace from both ends of a string
     .replace(/\s+/g, "-") // Replace spaces with -
     .replace(/&/g, "-and-") // Replace & with 'and'
     .replace(/[^\w\-]+/g, "") // Remove all non-word characters except for -
     .replace(/\-\-+/g, "-"); // Replace multiple - with single -
 }
 
-function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
-  const CustomHeading = ({ children, ...props }: TextProps<typeof as>) => {
-    const slug = slugify(children as string);
-    return (
-      <HeadingLink
-        style={{ marginTop: "var(--static-space-24)", marginBottom: "var(--static-space-12)" }}
-        as={as}
-        id={slug}
-        {...props}
-      >
-        {children}
-      </HeadingLink>
+function createHeading(level: number) {
+  const Heading = ({ children }: { children: React.ReactNode }) => {
+    let slug = slugify(children as string);
+    return React.createElement(
+      `h${level}`,
+      { id: slug },
+      [
+        React.createElement("a", {
+          href: `#${slug}`,
+          key: `link-${slug}`,
+          className: "anchor",
+        }),
+      ],
+      children,
     );
   };
-
-  CustomHeading.displayName = `${as}`;
-
-  return CustomHeading;
+  Heading.displayName = `Heading${level}`;
+  return Heading;
 }
 
-function createParagraph({ children }: TextProps) {
-  return (
-    <Text
-      style={{ lineHeight: "175%" }}
-      variant="body-default-m"
-      onBackground="neutral-medium"
-      marginTop="8"
-      marginBottom="12"
-    >
-      {children}
-    </Text>
-  );
-}
-
-function createInlineCode({ children }: { children: ReactNode }) {
-  return <InlineCode>{children}</InlineCode>;
-}
-
-function createCodeBlock(props: any) {
-  // For pre tags that contain code blocks
-  if (props.children && props.children.props && props.children.props.className) {
-    const { className, children } = props.children.props;
-    
-    // Extract language from className (format: language-xxx)
-    const language = className.replace('language-', '');
-    const label = language.charAt(0).toUpperCase() + language.slice(1);
-    
-    return (
-      <CodeBlock
-        marginTop="8"
-        marginBottom="16"
-        codeInstances={[
-          {
-            code: children,
-            language,
-            label
-          }
-        ]}
-        copyButton={true}
-      />
-    );
-  }
-  
-  // Fallback for other pre tags or empty code blocks
-  return <pre {...props} />;
-}
-
-const components = {
-  p: createParagraph as any,
-  h1: createHeading("h1") as any,
-  h2: createHeading("h2") as any,
-  h3: createHeading("h3") as any,
-  h4: createHeading("h4") as any,
-  h5: createHeading("h5") as any,
-  h6: createHeading("h6") as any,
-  img: createImage as any,
-  a: CustomLink as any,
-  code: createInlineCode as any,
-  pre: createCodeBlock as any,
-  Heading,
-  Text,
-  CodeBlock,
-  InlineCode,
-  Accordion: dynamic(() => import("@/once-ui/components").then(mod => mod.Accordion)),
-  AccordionGroup: dynamic(() => import("@/once-ui/components").then(mod => mod.AccordionGroup)),
-  Table: dynamic(() => import("@/once-ui/components").then(mod => mod.Table)),
-  Feedback: dynamic(() => import("@/once-ui/components").then(mod => mod.Feedback)),
-  Button: dynamic(() => import("@/once-ui/components").then(mod => mod.Button)),
-  Card: dynamic(() => import("@/once-ui/components").then(mod => mod.Card)),
-  Grid: dynamic(() => import("@/once-ui/components").then(mod => mod.Grid)),
-  Row: dynamic(() => import("@/once-ui/components").then(mod => mod.Row)),
-  Column: dynamic(() => import("@/once-ui/components").then(mod => mod.Column)),
-  Icon: dynamic(() => import("@/once-ui/components").then(mod => mod.Icon)),
-  SmartImage: dynamic(() => import("@/once-ui/components").then(mod => mod.SmartImage)),
-  SmartLink: dynamic(() => import("@/once-ui/components").then(mod => mod.SmartLink)),
+export const globalComponents = {
+  h1: createHeading(1),
+  h2: createHeading(2),
+  h3: createHeading(3),
+  h4: createHeading(4),
+  h5: createHeading(5),
+  h6: createHeading(6),
+  Image: RoundedImage,
+  a: CustomLink,
+  Table,
 };
-
-type CustomMDXProps = MDXRemoteProps & {
-  components?: typeof components;
-};
-
-export function CustomMDX(props: CustomMDXProps) {
-  return (
-    <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />
-  );
-}
