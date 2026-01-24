@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, NotebookIcon, FileText } from "lucide-react";
 
 export const DATA = {
   name: "Vunky Himawan",
@@ -8,9 +8,9 @@ export const DATA = {
   location: "Malang, Indonesia",
   locationLink: "https://www.google.com/maps/place/malang",
   description:
-    "A software developer who is studying software architecture, aspiring to become an entrepreneur by building innovative SaaS products.",
+    "A software developer who is studying software architecture, aspiring to become an entrepreneur by building innovative products.",
   summary:
-    "As a software developer specializing in [TypeScript and full-stack development](/), I'm deepening my knowledge in [software architecture for robust app design](/). I love blending technologies like AI with coffee inspired creativity in my projects. [My ambition: To become a successful entrepreneur by building impactful and user-friendly SaaS products](/).",
+    "As a software developer specializing in [TypeScript and full-stack development](/), I'm deepening my knowledge in [software architecture for robust app design](/). I love blending technologies like AI with coffee inspired creativity in my projects. [My ambition: To become a successful entrepreneur 🛐](/).",
   avatarUrl: "/images/avatar.jpg",
   skills: [
     "React",
@@ -35,6 +35,7 @@ export const DATA = {
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/Vunky Himawan - CV.pdf", icon: FileText, label: "Resume" },
   ],
   contact: {
     email: "vunkyhimawan19@gmail.com",
@@ -83,10 +84,10 @@ export const DATA = {
       badges: [],
       href: "https://dnetprovider.id",
       location: "Surabaya, Indonesia",
-      title: "Backend Developer",
+      title: "Fullstack Developer",
       logoUrl: "/images/companies/dutakom/logo.png",
       start: "Juli 2025",
-      end: "Present",
+      end: "December 2025",
       description:
         "Contribute at open source error tracking system based on Sentry by implement error alert notification to Telegram group with Telegram Bot at internal error tracking app.",
     },
@@ -95,7 +96,7 @@ export const DATA = {
       badges: [],
       href: "https://www.dot.co.id",
       location: "Remote",
-      title: "Full Stack Engineer",
+      title: "Fullstack Engineer",
       logoUrl: "/images/companies/dot-indonesia/logo.svg",
       start: "February 2025",
       end: "June 2025",
@@ -134,6 +135,32 @@ export const DATA = {
     },
   ],
   projects: [
+    {
+      title: "Dynamic Vehicle Routing Problem Simulation",
+      href: "",
+      dates: "Active",
+      active: true,
+      description:
+        "This thesis project focuses on simulating the Dynamic Vehicle Routing Problem (DVRP), aiming to optimize vehicle routes by adapting to changing conditions within the simulation.",
+      technologies: [
+        "Next.js",
+        "Node.js",
+        "Python",
+        "Google OR-Tools",
+        "Typescript",
+        "TomTom API",
+      ],
+      links: [
+        {
+          type: "Repository",
+          href: "https://github.com/geinala",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image:
+        "/images/projects/dynamic-vehicle-routing-problem/simulation-screen-mockup.webp",
+      video: "",
+    },
     {
       title: "Event Attendance System",
       href: "",
