@@ -1,36 +1,38 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon, FileText } from "lucide-react";
+import { FileText, HomeIcon, NotebookIcon } from "lucide-react";
+import { ReactLight } from "@/components/ui/svgs/reactLight";
+import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
+import { Typescript } from "@/components/ui/svgs/typescript";
+import { Nodejs } from "@/components/ui/svgs/nodejs";
+import { Python } from "@/components/ui/svgs/python";
+import { Postgresql } from "@/components/ui/svgs/postgresql";
+import { Docker } from "@/components/ui/svgs/docker";
+import { SprintBoot } from "@/components/ui/svgs/sprint-boot";
+import { Laravel } from "@/components/ui/svgs/laravel";
+import { FastAPI } from "@/components/ui/svgs/fastapi";
 
 export const DATA = {
   name: "Vunky Himawan",
   initials: "VH",
   url: "https://vunkyh.my.id",
-  location: "Malang, Indonesia",
-  locationLink: "https://www.google.com/maps/place/malang",
+  location: "Surabaya, ID",
+  locationLink: "https://www.google.com/maps/place/surabaya",
   description:
     "A software developer who is studying software architecture, aspiring to become an entrepreneur by building innovative products.",
   summary:
-    "As a software developer specializing in [TypeScript and full-stack development](/), I'm deepening my knowledge in [software architecture for robust app design](/). I love blending technologies like AI with coffee inspired creativity in my projects. [My ambition: To become a successful entrepreneur 🛐](/).",
-  avatarUrl: "/images/avatar.jpg",
+    "As a Full-Stack Developer specializing in TypeScript, I'm passionate about building scalable and maintainable applications while continuously exploring software architecture to create robust solutions. I enjoy blending technologies like AI with coffee-inspired creativity in my projects, and I'm always excited to learn new technologies and embrace new challenges. My ambition is to become a successful entrepreneur.",
+  avatarUrl: "/me.jpg",
   skills: [
-    "React",
-    "Svelte (Basic)",
-    "Vue (Basic)",
-    "Next.js",
-    "Flutter",
-    "Node.js",
-    "Express.js",
-    "Nest.js",
-    "Laravel",
-    "FastAPI",
-    "Python",
-    "Typescript",
-    "Rust (Basic)",
-    "GraphQL",
-    "REST API",
-    "MySQL",
-    "Postgres",
-    "Docker (Basic)",
+    { name: "React", icon: ReactLight },
+    { name: "Next.js", icon: NextjsIconDark },
+    { name: "Typescript", icon: Typescript },
+    { name: "Node.js", icon: Nodejs },
+    { name: "Python", icon: Python },
+    { name: "Postgres", icon: Postgresql },
+    { name: "Docker", icon: Docker },
+    { name: "Spring Boot", icon: SprintBoot },
+    { name: "Laravel", icon: Laravel },
+    { name: "FastAPI", icon: FastAPI },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -39,40 +41,24 @@ export const DATA = {
   ],
   contact: {
     email: "vunkyhimawan19@gmail.com",
-    tel: "",
     social: {
       GitHub: {
         name: "GitHub",
         url: "https://github.com/vunky-himawan",
         icon: Icons.github,
-
         navbar: true,
       },
+
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/vunky-himawan",
+        url: "https://linkedin.com/in/vunky-himawan",
         icon: Icons.linkedin,
-
         navbar: true,
       },
       email: {
         name: "Send Email",
         url: "mailto:vunkyhimawan19@gmail.com",
         icon: Icons.email,
-
-        navbar: true,
-      },
-      X: {
-        name: "X",
-        url: "https://dub.sh/dillion-twitter",
-        icon: Icons.x,
-
-        navbar: false,
-      },
-      Youtube: {
-        name: "Youtube",
-        url: "https://dub.sh/dillion-youtube",
-        icon: Icons.youtube,
         navbar: false,
       },
     },
@@ -80,38 +66,62 @@ export const DATA = {
 
   work: [
     {
-      company: "PT Dutakom Wibawa Putra (D~NET)",
+      company: "PT Dutakom Wibawa Putra (Spectrumindo)",
+      href: "https://spectrumindo.co.id",
       badges: [],
-      href: "https://dnetprovider.id",
       location: "Surabaya, Indonesia",
       title: "Fullstack Developer",
       logoUrl: "/images/companies/dutakom/logo.png",
+      start: "Jun 2026",
+      end: "Present",
+      description:
+        "Developing and maintaining internal business applications, collaborating with cross-functional teams to build scalable features, improve existing systems, and streamline internal business processes.",
+    },
+    {
+      company: "PT eCentrix Solusi Indonesia",
+      badges: [],
+      href: "https://ecentrix.com",
+      location: "Remote",
+      title: "Backend Developer Freelance",
+      logoUrl: "/images/companies/ecentrix/logo.png",
+      start: "April 2026",
+      end: "June 2026",
+      description:
+        "Contributed to rewriting the Collection Management System by migrating the backend from the legacy system to Java Spring Boot, focusing on improving maintainability, scalability, and overall system architecture.",
+    },
+    {
+      company: "PT Dutakom Wibawa Putra (Holding)",
+      href: "https://spectrumindo.co.id",
+      badges: [],
+      location: "Surabaya, Indonesia",
+      title: "Fullstack Developer Intern",
+      logoUrl: "/images/companies/dutakom/logo.png",
       start: "Juli 2025",
-      end: "December 2025",
+      end: "Desember 2025",
       description:
         "Contribute at open source error tracking system based on Sentry by implement error alert notification to Telegram group with Telegram Bot at internal error tracking app.",
     },
     {
       company: "DOT Indonesia",
+      href: "https://splunk.com",
       badges: [],
-      href: "https://www.dot.co.id",
       location: "Remote",
-      title: "Fullstack Engineer",
+      title: "Fullstack Engineer Intern",
       logoUrl: "/images/companies/dot-indonesia/logo.svg",
       start: "February 2025",
-      end: "June 2025",
+      end: "Juni 2025",
       description:
         "Developing a full-stack internal HRIS, from building the backend, integrating APIs using tRPC, to slicing and implementing the front-end.",
     },
     {
       company: "DOT Indonesia",
-      href: "https://www.dot.co.id",
+      href: "https://li.me/",
       badges: [],
       location: "Remote",
-      title: "Frontend Engineer",
+      title: "Frontend Engineer Intern",
       logoUrl: "/images/companies/dot-indonesia/logo.svg",
       start: "November 2024",
-      end: "January 2025",
+      end: "February 2025",
       description:
         "Developing an internal HRIS front-end by slicing the UI from the design and integrating type-safe using Typescript Remote Procedure Call (tRPC)",
     },
@@ -119,16 +129,16 @@ export const DATA = {
   education: [
     {
       school: "Politeknik Negeri Malang",
-      href: "https://www.polinema.ac.id",
-      degree: "Diploma in Informatics Engineering",
+      href: "https://buildspace.so",
+      degree: "Sarjana Terapan (S.Tr.) in Informatics Engineering",
       logoUrl: "/images/schools/polinema/logo.png",
       start: "2022",
-      end: "present",
+      end: "2026",
     },
     {
-      school: "SMK Yosonegoro - Magetan",
-      href: "https://sekolah.smk-yosonegoro.sch.id",
-      degree: "Computer and Network Engineering",
+      school: "SMK Yosonegoro, Magetan",
+      href: "https://uwaterloo.ca",
+      degree: "High School Diploma",
       logoUrl: "/images/schools/yosonegoro/logo.png",
       start: "2019",
       end: "2022",
@@ -136,24 +146,27 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Dynamic Vehicle Routing Problem Simulation",
+      title: "Routify",
       href: "",
-      dates: "Active",
-      active: true,
+      dates: "Nov 2025 - Jun 2026",
+      active: false,
       description:
         "This thesis project focuses on simulating the Dynamic Vehicle Routing Problem (DVRP), aiming to optimize vehicle routes by adapting to changing conditions within the simulation.",
       technologies: [
         "Next.js",
-        "Node.js",
-        "Python",
-        "Google OR-Tools",
         "Typescript",
-        "TomTom API",
+        "PostgreSQL",
+        "Drizzle ORM",
+        "TailwindCSS",
+        "Shadcn UI",
+        "FastAPI",
+        "Redis",
+        "Docker",
       ],
       links: [
         {
-          type: "Repository",
-          href: "https://github.com/geinala",
+          type: "Github",
+          href: "https://github.com/geinala/",
           icon: <Icons.github className="size-3" />,
         },
       ],
@@ -214,14 +227,7 @@ export const DATA = {
       active: true,
       description:
         "The Hidden Gem Promotion System is a web platform aimed at promoting lesser-known tourist destinations and local MSMEs. Built as part of a competition, the project placed 6th out of over 20 entries.",
-      technologies: [
-        "React",
-        "Vite",
-        "Typescript",
-        "Tiptap",
-        "NestJS",
-        "Typescript",
-      ],
+      technologies: ["React", "Vite", "Typescript", "Tiptap", "NestJS"],
       links: [
         {
           type: "Backend",
